@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_set_list">
+
+    <fragment
+        android:id="@+id/nav_set_list"
+        android:name="me.alejandro.mtgspoileralert.ui.setList.SetListFragment"
+        android:label="Sets"
+        tools:layout="@layout/fragment_set_list">
+        <action
+            android:id="@+id/action_nav_set_list_to_setFragment"
+            app:destination="@id/setFragment" >
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/setFragment"
+        android:name="me.alejandro.mtgspoileralert.ui.cardList.CardListFragment"
+        android:label="Cards"
+        tools:layout="@layout/fragment_card_list" >
+        <argument
+            android:name="set_code"
+            app:argType="string" />
+    </fragment>
+
+    <!--
+     <fragment
+        android:id="@+id/nav_home_second"
+        android:name="me.alejandro.mtgspoileralert.ui.ui.home.HomeSecondFragment"
+        android:label="@string/home_second"
+        tools:layout="@layout/fragment_home_second">
+        <action
+            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
+            app:destination="@id/nav_home" />
+
+        <argument
+            android:name="myArg"
+            app:argType="string" />
+    </fragment> -->
+
+</navigation>
