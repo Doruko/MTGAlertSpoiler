@@ -1,10 +1,9 @@
 package me.alejandro.mtgspoileralert.ui.cardList
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -32,6 +31,8 @@ class CardListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_card_list, container, false)
         val root = binding.root
         binding.cardList.layoutManager = GridLayoutManager(activity, 2)
@@ -75,4 +76,20 @@ class CardListFragment : Fragment() {
         errorSnackBar?.dismiss()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.main, menu)
+        val item = menu.findItem(R.id.action_search)
+        val searchView: SearchView = item.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                //FILTER AS YOU TYPE
+                viewModel.cardListAdapter.filter.filter(query)
+                return false
+            }
+        })
+    }
 }

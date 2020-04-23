@@ -29,6 +29,8 @@ class SetListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(false)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_list, container, false)
         val root = binding.root
         binding.setList.layoutManager =
