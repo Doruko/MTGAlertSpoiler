@@ -4,6 +4,7 @@ import android.widget.Filter
 import me.alejandro.mtgspoileralert.model.card.Card
 import java.util.*
 
+
 class CardFilter(private val adapter: CardListAdapter, private val list: List<Card>) : Filter() {
     override fun performFiltering(constraint: CharSequence?): FilterResults {
         val results = FilterResults()

@@ -34,6 +34,8 @@ class CardListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_card_list, container, false)
+        binding.lifecycleOwner = this
+
         val root = binding.root
         binding.cardList.layoutManager = GridLayoutManager(activity, 2)
 
@@ -41,15 +43,18 @@ class CardListFragment : Fragment() {
             ViewModelProvider(this, viewModelFactory { CardListViewModel(args.setCode) }).get(
                 CardListViewModel::class.java
             )
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
-            if (errorMessage != null) showError(errorMessage) else hideError()
-        })
 
-        viewModel.cardBigUrl.observe(viewLifecycleOwner, Observer { url ->
-            showDialog(url)
-        })
+        with(viewLifecycleOwner) {
+            viewModel.errorMessage.observe(this, Observer { errorMessage ->
+                if (errorMessage != null) showError(errorMessage) else hideError()
+            })
+            viewModel.cardBigUrl.observe(this, Observer { url ->
+                showDialog(url)
+            })
+        }
 
         binding.viewModel = viewModel
+
         return root
     }
 
@@ -67,9 +72,11 @@ class CardListFragment : Fragment() {
     }
 
     private fun showError(@StringRes errorMessage: Int) {
-        errorSnackBar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
-        errorSnackBar?.setAction(R.string.retry, viewModel.errorClickListener)
-        errorSnackBar?.show()
+        errorSnackBar =
+            Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE).apply {
+                setAction(R.string.retry, viewModel.errorClickListener)
+                show()
+            }
     }
 
     private fun hideError() {
@@ -86,10 +93,13 @@ class CardListFragment : Fragment() {
             }
 
             override fun onQueryTextChange(query: String?): Boolean {
-                //FILTER AS YOU TYPE
                 viewModel.cardListAdapter.filter.filter(query)
                 return false
             }
+        })
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            if (isLoading) item.collapseActionView()
+
         })
     }
 }
