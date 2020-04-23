@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import me.alejandro.mtgspoileralert.utils.extension.getParentActivity
 
@@ -29,9 +30,9 @@ fun setMutableText(view: TextView, text: MutableLiveData<String>?) {
     }
 }
 
-@BindingAdapter("urlImage")
-fun setUrlImage(view: ImageView, url: String){
-    Picasso.get().load(url).into(view)
+@BindingAdapter(value = ["urlImage", "urlImageCallback"], requireAll = false)
+fun setUrlImage(view: ImageView, url: String, callBack: Callback?) {
+    Picasso.get().load(url).into(view, callBack)
 }
 
 @BindingAdapter("adapter")
