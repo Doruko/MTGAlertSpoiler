@@ -17,6 +17,7 @@ class CardListViewModel(private val setCode: String) : BaseViewModel(), CardClic
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
     val cardBigUrl: MutableLiveData<String> = MutableLiveData()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     val cardListAdapter: CardListAdapter = CardListAdapter(this)
 
@@ -27,8 +28,8 @@ class CardListViewModel(private val setCode: String) : BaseViewModel(), CardClic
         loadCards(setCode)
     }
 
-    private fun loadCards(code: String) {
-        onRetrieveCardListStart()
+    private fun loadCards(code: String, swipeUpdate: Boolean = false) {
+        onRetrieveCardListStart(swipeUpdate)
         viewModelScope.launch {
             try{
                 val res = scryfallApi.getCards(code = "e:$code")
@@ -36,13 +37,20 @@ class CardListViewModel(private val setCode: String) : BaseViewModel(), CardClic
             }catch (e: Exception){
                 onRetrieveCardListError()
             } finally {
-                onRetrieveCardListFinish()
+                onRetrieveCardListFinish(swipeUpdate)
             }
         }
     }
 
-    private fun onRetrieveCardListFinish() {
-        loadingVisibility.value = View.GONE
+    fun refreshCards() {
+        loadCards(setCode, true)
+    }
+
+    private fun onRetrieveCardListFinish(swipeUpdate: Boolean) {
+        if (swipeUpdate)
+            isLoading.value = false
+        else
+            loadingVisibility.value = View.GONE
     }
 
     private fun onRetrieveCardListError() {
@@ -53,8 +61,12 @@ class CardListViewModel(private val setCode: String) : BaseViewModel(), CardClic
         cardListAdapter.updateSetList(response.data)
     }
 
-    private fun onRetrieveCardListStart() {
-        loadingVisibility.value = View.VISIBLE
+    private fun onRetrieveCardListStart(swipeUpdate: Boolean) {
+        if (swipeUpdate)
+            isLoading.value = true
+        else
+            loadingVisibility.value = View.VISIBLE
+
         errorMessage.value = null
     }
 

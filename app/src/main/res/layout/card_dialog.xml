@@ -19,7 +19,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:mutableVisibility="@{viewModel.getLoadingVisibility()}" />
+            app:mutableVisibility="@{viewModel.loadingVisibility}" />
 
         <ImageView
             android:id="@+id/card_dialog_iv"
@@ -29,8 +29,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:urlImage="@{viewModel.getCardUrl()}"
-            app:urlImageCallback="@{viewModel.getCardCallback()}" />
+            app:urlImage="@{viewModel.cardUrl}"
+            app:urlImageCallback="@{viewModel.cardCallback}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

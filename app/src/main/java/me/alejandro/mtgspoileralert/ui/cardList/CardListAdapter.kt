@@ -33,11 +33,7 @@ class CardListAdapter(val cardClickListener: CardClickListener) :
     override fun getItemCount() = if (::cardList.isInitialized) cardList.size else 0
 
     override fun getFilter(): Filter {
-        if (cardFilter != null) {
-            cardFilter
-        } else {
-            cardFilter = CardFilter(this, cardList)
-        }
+        cardFilter = cardFilter ?: CardFilter(this, cardList)
         return cardFilter as CardFilter
     }
 

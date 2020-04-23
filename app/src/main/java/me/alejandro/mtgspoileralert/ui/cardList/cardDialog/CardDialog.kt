@@ -3,11 +3,9 @@ package me.alejandro.mtgspoileralert.ui.cardList.cardDialog
 import android.app.Dialog
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
 import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
-import com.squareup.picasso.Callback
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.databinding.CardDialogBinding
 
@@ -35,19 +33,7 @@ class CardDialog(activity: FragmentActivity) : Dialog(activity) {
     }
 
     fun loadCardImage(url: String) {
-        viewModel.loadingVisibility.value = View.VISIBLE
-        viewModel.cardCallback.value = object : Callback {
-            override fun onSuccess() {
-                viewModel.loadingVisibility.value = View.GONE
-            }
-
-            override fun onError(e: Exception?) {
-                viewModel.loadingVisibility.value = View.GONE
-            }
-
-        }
-        viewModel.cardUrl.value = url
-
+        viewModel.loadImage(url)
     }
 
 

@@ -32,6 +32,8 @@ class SetListFragment : Fragment() {
         setHasOptionsMenu(false)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_list, container, false)
+        binding.lifecycleOwner = this
+
         val root = binding.root
         binding.setList.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -40,9 +42,6 @@ class SetListFragment : Fragment() {
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
         })
-        /*viewModel.loadingVisibility.observe(viewLifecycleOwner, Observer {
-                value -> progressbar.visibility = value ?: View.VISIBLE
-        })*/
 
         binding.viewModel = viewModel
         return root
@@ -54,9 +53,11 @@ class SetListFragment : Fragment() {
     }
 
     private fun showError(@StringRes errorMessage: Int){
-        errorSnackBar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
-        errorSnackBar?.setAction(R.string.retry, viewModel.errorClickListener)
-        errorSnackBar?.show()
+        errorSnackBar =
+            Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE).apply {
+                setAction(R.string.retry, viewModel.errorClickListener)
+                show()
+            }
     }
 
     private fun hideError(){
