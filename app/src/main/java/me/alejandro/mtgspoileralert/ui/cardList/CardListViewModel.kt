@@ -4,25 +4,24 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-
-import kotlinx.coroutines.runBlocking
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.base.BaseViewModel
 import me.alejandro.mtgspoileralert.model.card.CardResponse
 import me.alejandro.mtgspoileralert.network.ScryfallApi
-import java.lang.Exception
 import javax.inject.Inject
 
-class CardListViewModel(private val setCode: String) : BaseViewModel() {
+class CardListViewModel(private val setCode: String) : BaseViewModel(), CardClickListener {
     @Inject
     lateinit var scryfallApi: ScryfallApi
 
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
+    val cardBigUrl: MutableLiveData<String> = MutableLiveData()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
-    val cardListAdapter: CardListAdapter = CardListAdapter()
+    val cardListAdapter: CardListAdapter = CardListAdapter(this)
 
     val errorClickListener = View.OnClickListener { loadCards(setCode) }
+
 
     init {
         loadCards(setCode)
@@ -57,5 +56,9 @@ class CardListViewModel(private val setCode: String) : BaseViewModel() {
     private fun onRetrieveCardListStart() {
         loadingVisibility.value = View.VISIBLE
         errorMessage.value = null
+    }
+
+    override fun cardClicked(largeUrl: String) {
+        cardBigUrl.value = largeUrl
     }
 }

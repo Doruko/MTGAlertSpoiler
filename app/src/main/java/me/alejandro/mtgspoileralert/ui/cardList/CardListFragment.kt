@@ -1,21 +1,23 @@
 package me.alejandro.mtgspoileralert.ui.cardList
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
-
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.databinding.FragmentCardListBinding
 import me.alejandro.mtgspoileralert.injection.viewModelFactory
+import me.alejandro.mtgspoileralert.ui.cardList.cardDialog.CardDialog
+import me.alejandro.mtgspoileralert.ui.cardList.cardDialog.CardDialogViewModel
+
 
 class CardListFragment : Fragment() {
 
@@ -42,8 +44,25 @@ class CardListFragment : Fragment() {
             if (errorMessage != null) showError(errorMessage) else hideError()
         })
 
+        viewModel.cardBigUrl.observe(viewLifecycleOwner, Observer { url ->
+            showDialog(url)
+        })
+
         binding.viewModel = viewModel
         return root
+    }
+
+    private fun showDialog(url: String) {
+        CardDialog(requireActivity()).apply {
+            show()
+        }.also {
+            it.setViewModel(
+                ViewModelProvider(this, viewModelFactory { CardDialogViewModel() }).get(
+                    CardDialogViewModel::class.java
+                )
+            )
+            it.loadCardImage(url)
+        }
     }
 
     private fun showError(@StringRes errorMessage: Int) {

@@ -8,7 +8,8 @@ import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.databinding.ItemCardBinding
 import me.alejandro.mtgspoileralert.model.card.Card
 
-class CardListAdapter : RecyclerView.Adapter<CardListAdapter.ViewHolder>() {
+class CardListAdapter(val cardClickListener: CardClickListener) :
+    RecyclerView.Adapter<CardListAdapter.ViewHolder>() {
     private lateinit var cardList: List<Card>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -18,7 +19,12 @@ class CardListAdapter : RecyclerView.Adapter<CardListAdapter.ViewHolder>() {
             parent,
             false
         )
-        return ViewHolder(binding)
+        return ViewHolder(binding).apply {
+            itemView.setOnClickListener {
+                val card = cardList[this.adapterPosition]
+                cardClickListener.cardClicked(card.image_uris.png)
+            }
+        }
     }
 
     override fun getItemCount() = if (::cardList.isInitialized) cardList.size else 0
