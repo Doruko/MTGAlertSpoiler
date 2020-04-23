@@ -33,7 +33,9 @@
                 android:id="@+id/card_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:adapter="@{viewModel.cardListAdapter}" />
+                app:adapter="@{viewModel.cardListAdapter}"
+                app:drawingCacheEnabled="@{true}"
+                app:itemViewCacheSize="@{25}" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
