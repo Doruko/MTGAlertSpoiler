@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.databinding.ItemCardBinding
-import me.alejandro.mtgspoileralert.model.card.Card
+import me.alejandro.mtgspoileralert.domain.model.card.Card
 
 class CardListAdapter(val cardClickListener: CardClickListener) :
     RecyclerView.Adapter<CardListAdapter.ViewHolder>(), Filterable {

@@ -59,7 +59,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation "com.android.support:appcompat-v7:$android_support_version"
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+
     testImplementation 'junit:junit:4.12'
+    testImplementation "io.mockk:mockk:$mockkVersion"
+
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
@@ -75,6 +78,7 @@ dependencies {
 
     //LiveData & ViewModel
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    testImplementation "android.arch.core:core-testing:$lifecycleVersion"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -95,6 +99,7 @@ dependencies {
     //Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
 
     //Picasso
     implementation "com.squareup.picasso:picasso:$picassoVersion"

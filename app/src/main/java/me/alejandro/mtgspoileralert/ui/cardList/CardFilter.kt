@@ -1,7 +1,7 @@
 package me.alejandro.mtgspoileralert.ui.cardList
 
 import android.widget.Filter
-import me.alejandro.mtgspoileralert.model.card.Card
+import me.alejandro.mtgspoileralert.domain.model.card.Card
 import java.util.*
 
 

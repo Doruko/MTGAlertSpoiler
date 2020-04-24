@@ -3,7 +3,7 @@ package me.alejandro.mtgspoileralert.ui.cardList.cardDialog
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.squareup.picasso.Callback
-import me.alejandro.mtgspoileralert.base.BaseViewModel
+import me.alejandro.mtgspoileralert.domain.base.BaseViewModel
 
 class CardDialogViewModel : BaseViewModel() {
     val cardUrl = MutableLiveData<String>()

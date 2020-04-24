@@ -1,4 +1,4 @@
-package me.alejandro.mtgspoileralert.model.card
+package me.alejandro.mtgspoileralert.domain.model.card
 
 data class CardImageUri(
     val small: String,

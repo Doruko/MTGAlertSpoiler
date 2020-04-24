@@ -1,4 +1,4 @@
-package me.alejandro.mtgspoileralert.base
+package me.alejandro.mtgspoileralert.domain.base
 
 import androidx.lifecycle.ViewModel
 import me.alejandro.mtgspoileralert.injection.component.DaggerViewModelInjector
