@@ -1,6 +1,6 @@
-package me.alejandro.mtgspoileralert.model.set
+package me.alejandro.mtgspoileralert.domain.model.set
 
-import me.alejandro.mtgspoileralert.model.base.ObjectResponse
+import me.alejandro.mtgspoileralert.domain.model.base.ObjectResponse
 
 data class Set(
     val code: String,

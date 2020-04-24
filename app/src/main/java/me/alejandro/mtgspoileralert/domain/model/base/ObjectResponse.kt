@@ -1,4 +1,4 @@
-package me.alejandro.mtgspoileralert.model.base
+package me.alejandro.mtgspoileralert.domain.model.base
 
 import com.squareup.moshi.Json
 
