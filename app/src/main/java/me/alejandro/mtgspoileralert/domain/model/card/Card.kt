@@ -1,7 +1,7 @@
-package me.alejandro.mtgspoileralert.model.card
+package me.alejandro.mtgspoileralert.domain.model.card
 
 import com.squareup.moshi.Json
-import me.alejandro.mtgspoileralert.model.base.ObjectResponse
+import me.alejandro.mtgspoileralert.domain.model.base.ObjectResponse
 
 data class Card (
     val lang: String,

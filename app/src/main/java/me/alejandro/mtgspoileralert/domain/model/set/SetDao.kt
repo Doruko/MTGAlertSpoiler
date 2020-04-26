@@ -1,4 +1,4 @@
-package me.alejandro.mtgspoileralert.model.set
+package me.alejandro.mtgspoileralert.domain.model.set
 
 import androidx.room.Dao
 import androidx.room.Insert

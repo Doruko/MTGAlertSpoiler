@@ -7,9 +7,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.databinding.ItemSetBinding
-import me.alejandro.mtgspoileralert.model.set.Set
+import me.alejandro.mtgspoileralert.domain.model.set.Set
 
-class SetListAdapter : RecyclerView.Adapter<SetListAdapter.ViewHolder>() {
+class SetListAdapter() : RecyclerView.Adapter<SetListAdapter.ViewHolder>() {
     private lateinit var setList: List<Set>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
