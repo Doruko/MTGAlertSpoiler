@@ -1,8 +1,8 @@
 package me.alejandro.mtgspoileralert.ui.setList
 
 import androidx.lifecycle.MutableLiveData
-import me.alejandro.mtgspoileralert.base.BaseViewModel
-import me.alejandro.mtgspoileralert.model.set.Set
+import me.alejandro.mtgspoileralert.domain.base.BaseViewModel
+import me.alejandro.mtgspoileralert.domain.model.set.Set
 
 class SetItemViewModel: BaseViewModel() {
     private val setTitle = MutableLiveData<String>()
