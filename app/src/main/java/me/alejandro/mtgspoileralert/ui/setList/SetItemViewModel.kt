@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import me.alejandro.mtgspoileralert.domain.base.BaseViewModel
 import me.alejandro.mtgspoileralert.domain.model.set.Set
 
-class SetItemViewModel: BaseViewModel() {
+class SetItemViewModel() : BaseViewModel() {
     private val setTitle = MutableLiveData<String>()
     private val setCode = MutableLiveData<String>()
 

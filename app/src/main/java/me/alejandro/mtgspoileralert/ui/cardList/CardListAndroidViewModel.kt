@@ -1,16 +1,18 @@
 package me.alejandro.mtgspoileralert.ui.cardList
 
+import android.app.Application
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.data.usecases.GetCardsUseCase
-import me.alejandro.mtgspoileralert.domain.base.BaseViewModel
+import me.alejandro.mtgspoileralert.domain.base.BaseAndroidViewModel
 import me.alejandro.mtgspoileralert.domain.base.Failure
 import me.alejandro.mtgspoileralert.domain.model.card.Card
 import javax.inject.Inject
 
-class CardListViewModel(private val setCode: String) : BaseViewModel(), CardClickListener {
+class CardListAndroidViewModel(application: Application, private val setCode: String) :
+    BaseAndroidViewModel(application), CardClickListener {
 
     @Inject
     lateinit var getCardsUseCase: GetCardsUseCase
@@ -43,6 +45,11 @@ class CardListViewModel(private val setCode: String) : BaseViewModel(), CardClic
     }
 
     private fun handleSuccess(list: List<Card>) {
+        val context = getApplication<Application>().applicationContext
+        val prefs = context.getSharedPreferences("cardsPreferences", 0)
+
+        prefs.edit().putString(setCode, list.joinToString()).apply()
+
         cardListAdapter.updateSetList(list)
     }
 

@@ -21,7 +21,7 @@ import me.alejandro.mtgspoileralert.ui.cardList.cardDialog.CardDialogViewModel
 class CardListFragment : Fragment() {
 
     private lateinit var binding: FragmentCardListBinding
-    private lateinit var viewModel: CardListViewModel
+    private lateinit var viewModel: CardListAndroidViewModel
     private val args: CardListFragmentArgs by navArgs()
 
     private var errorSnackBar: Snackbar? = null
@@ -40,8 +40,15 @@ class CardListFragment : Fragment() {
         binding.cardList.layoutManager = GridLayoutManager(activity, 2)
 
         viewModel =
-            ViewModelProvider(this, viewModelFactory { CardListViewModel(args.setCode) }).get(
-                CardListViewModel::class.java
+            ViewModelProvider(
+                this,
+                viewModelFactory {
+                    CardListAndroidViewModel(
+                        requireActivity().application,
+                        args.setCode
+                    )
+                }).get(
+                CardListAndroidViewModel::class.java
             )
 
         with(viewLifecycleOwner) {
