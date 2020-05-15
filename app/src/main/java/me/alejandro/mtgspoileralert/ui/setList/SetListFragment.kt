@@ -19,7 +19,7 @@ import me.alejandro.mtgspoileralert.injection.viewModelFactory
 
 class SetListFragment : Fragment() {
     private lateinit var binding: FragmentSetListBinding
-    private lateinit var viewModel: SetListViewModel
+    private lateinit var viewModel: SetListAndroidViewModel
     private lateinit var progressbar: ProgressBar
 
     private var errorSnackBar: Snackbar? = null
@@ -38,7 +38,11 @@ class SetListFragment : Fragment() {
         binding.setList.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
-        viewModel = ViewModelProvider(this, viewModelFactory { SetListViewModel() }).get(SetListViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory { SetListAndroidViewModel(requireActivity().application) }).get(
+            SetListAndroidViewModel::class.java
+        )
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
         })

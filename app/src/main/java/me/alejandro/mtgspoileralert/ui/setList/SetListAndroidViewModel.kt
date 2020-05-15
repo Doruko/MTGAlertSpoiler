@@ -1,17 +1,18 @@
 package me.alejandro.mtgspoileralert.ui.setList
 
+import android.app.Application
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.data.usecases.GetSetsUseCase
-import me.alejandro.mtgspoileralert.domain.base.BaseViewModel
+import me.alejandro.mtgspoileralert.domain.base.BaseAndroidViewModel
 import me.alejandro.mtgspoileralert.domain.base.Failure
 import me.alejandro.mtgspoileralert.domain.model.set.Set
 import me.alejandro.mtgspoileralert.domain.model.set.SetType
 import javax.inject.Inject
 
-class SetListViewModel : BaseViewModel() {
+class SetListAndroidViewModel(application: Application) : BaseAndroidViewModel(application) {
 
     @Inject
     lateinit var getSetsUseCase: GetSetsUseCase

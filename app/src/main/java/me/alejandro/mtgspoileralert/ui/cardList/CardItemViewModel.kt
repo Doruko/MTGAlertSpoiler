@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import me.alejandro.mtgspoileralert.domain.base.BaseViewModel
 import me.alejandro.mtgspoileralert.domain.model.card.Card
 
-class CardItemViewModel: BaseViewModel() {
+class CardItemViewModel() : BaseViewModel() {
     private val cardUrl = MutableLiveData<String>()
 
     fun bind(card: Card){
