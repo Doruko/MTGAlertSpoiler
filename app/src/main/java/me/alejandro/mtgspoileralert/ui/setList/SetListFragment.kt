@@ -1,19 +1,17 @@
 package me.alejandro.mtgspoileralert.ui.setList
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ProgressBar
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import me.alejandro.mtgspoileralert.R
-
 import me.alejandro.mtgspoileralert.databinding.FragmentSetListBinding
 import me.alejandro.mtgspoileralert.injection.viewModelFactory
 
@@ -29,7 +27,7 @@ class SetListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(false)
+        setHasOptionsMenu(true)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_list, container, false)
         binding.lifecycleOwner = this
@@ -66,5 +64,19 @@ class SetListFragment : Fragment() {
 
     private fun hideError(){
         errorSnackBar?.dismiss()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.settings, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings -> {
+                findNavController().navigate(R.id.openSettingsAction)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

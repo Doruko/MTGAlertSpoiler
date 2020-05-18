@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="network_category"
+        android:title="Network">
+
+        <SwitchPreferenceCompat
+            android:key="@string/preference_recurrent_calls"
+            android:title="Enable recurrent calls" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

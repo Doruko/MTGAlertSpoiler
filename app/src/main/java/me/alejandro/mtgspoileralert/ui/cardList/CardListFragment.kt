@@ -91,7 +91,7 @@ class CardListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.search, menu)
         val item = menu.findItem(R.id.action_search)
         val searchView: SearchView = item.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

@@ -59,6 +59,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation "com.android.support:appcompat-v7:$android_support_version"
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation "androidx.preference:preference-ktx:$preference_version"
+
 
     testImplementation 'junit:junit:4.12'
     testImplementation "io.mockk:mockk:$mockkVersion"
