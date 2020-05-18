@@ -26,19 +26,12 @@
             app:argType="string" />
     </fragment>
 
-    <!--
-     <fragment
-        android:id="@+id/nav_home_second"
-        android:name="me.alejandro.mtgspoileralert.ui.ui.home.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
-        <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
-
-        <argument
-            android:name="myArg"
-            app:argType="string" />
-    </fragment> -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="me.alejandro.mtgspoileralert.ui.settings.SettingsFragment"
+        android:label="Settings" />
+    <action
+        android:id="@+id/openSettingsAction"
+        app:destination="@id/settingsFragment" />
 
 </navigation>

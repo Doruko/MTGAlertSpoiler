@@ -8,4 +8,5 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:searchHintIcon="@drawable/search"
         app:showAsAction="always|collapseActionView" />
+
 </menu>
