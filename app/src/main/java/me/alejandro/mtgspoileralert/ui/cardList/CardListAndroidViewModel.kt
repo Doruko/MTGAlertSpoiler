@@ -4,12 +4,15 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.data.usecases.GetCardsUseCase
 import me.alejandro.mtgspoileralert.domain.base.BaseAndroidViewModel
 import me.alejandro.mtgspoileralert.domain.base.Failure
 import me.alejandro.mtgspoileralert.domain.model.card.Card
 import me.alejandro.mtgspoileralert.utils.CARDS_PREFERENCE
+import me.alejandro.mtgspoileralert.utils.LATEST_RESPONSE_PREFERENCE
 import javax.inject.Inject
 
 class CardListAndroidViewModel(application: Application, private val setCode: String) :
@@ -49,7 +52,13 @@ class CardListAndroidViewModel(application: Application, private val setCode: St
         val context = getApplication<Application>().applicationContext
         val prefs = context.getSharedPreferences(CARDS_PREFERENCE, 0)
 
-        prefs.edit().putString(setCode, list.joinToString()).apply()
+        val moshi = Moshi.Builder().build()
+        val type = Types.newParameterizedType(List::class.java, Card::class.java)
+        val adapter = moshi.adapter<List<Card>>(type)
+
+        prefs.edit()
+            .putString(LATEST_RESPONSE_PREFERENCE, adapter.toJson(list))
+            .apply()
 
         cardListAdapter.updateSetList(list)
     }
