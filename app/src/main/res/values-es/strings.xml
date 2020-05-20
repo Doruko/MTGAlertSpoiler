@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MTG Spoiler Alert</string>
+    <string name="retry">Reintentar</string>
+    <string name="set_error">Ha habido un problema cargando las expansiones</string>
+    <string name="card_error">Ha habido un problema cargando las cartas</string>
+    <string name="menu_settings">Configuración</string>
+    <string name="new_cards_notification_content">¡Hay cartas nuevas!</string>
+</resources>
