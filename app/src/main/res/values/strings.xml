@@ -4,20 +4,10 @@
     <string name="retry">Retry</string>
     <string name="set_error">An error occurred while loading the sets</string>
     <string name="card_error">An error occurred while loading the cards</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-
     <string name="menu_settings">Settings</string>
-
-    <string name="home_second">Home Second</string>
 
     <string name="preferences_cards" translatable="false">cardsPreferences</string>
     <string name="preference_recurrent_calls" translatable="false">recurrentCall</string>
-    <string name="new_cards_notification_title">MTGAlertSpoiler</string>
+    <string name="new_cards_notification_title" translatable="false">MTGAlertSpoiler</string>
     <string name="new_cards_notification_content">There are new cards!</string>
 </resources>
