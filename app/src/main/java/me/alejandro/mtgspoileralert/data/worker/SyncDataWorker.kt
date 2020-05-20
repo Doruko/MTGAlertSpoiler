@@ -66,7 +66,7 @@ class SyncDataWorker @Inject constructor(
             val adapter = moshi.adapter<List<Card>>(type)
 
             adapter.fromJson(latestResponse)?.let {
-                if (list.size >= it.size) {
+                if (list.size > it.size) {
                     createNotificationChannel()
 
                     val bundle = Bundle()
