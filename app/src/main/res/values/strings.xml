@@ -16,5 +16,6 @@
 
     <string name="home_second">Home Second</string>
 
+    <string name="preferences_cards" translatable="false">cardsPreferences</string>
     <string name="preference_recurrent_calls" translatable="false">recurrentCall</string>
 </resources>

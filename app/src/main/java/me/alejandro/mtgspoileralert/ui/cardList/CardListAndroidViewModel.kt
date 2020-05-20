@@ -9,6 +9,7 @@ import me.alejandro.mtgspoileralert.data.usecases.GetCardsUseCase
 import me.alejandro.mtgspoileralert.domain.base.BaseAndroidViewModel
 import me.alejandro.mtgspoileralert.domain.base.Failure
 import me.alejandro.mtgspoileralert.domain.model.card.Card
+import me.alejandro.mtgspoileralert.utils.CARDS_PREFERENCE
 import javax.inject.Inject
 
 class CardListAndroidViewModel(application: Application, private val setCode: String) :
@@ -46,7 +47,7 @@ class CardListAndroidViewModel(application: Application, private val setCode: St
 
     private fun handleSuccess(list: List<Card>) {
         val context = getApplication<Application>().applicationContext
-        val prefs = context.getSharedPreferences("cardsPreferences", 0)
+        val prefs = context.getSharedPreferences(CARDS_PREFERENCE, 0)
 
         prefs.edit().putString(setCode, list.joinToString()).apply()
 
