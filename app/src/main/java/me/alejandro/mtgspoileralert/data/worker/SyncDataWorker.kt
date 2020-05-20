@@ -9,12 +9,17 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.data.usecases.GetCardsUseCase
 import me.alejandro.mtgspoileralert.domain.base.Failure
 import me.alejandro.mtgspoileralert.domain.model.card.Card
+import me.alejandro.mtgspoileralert.utils.CARDS_PREFERENCE
+import me.alejandro.mtgspoileralert.utils.LATEST_RESPONSE_PREFERENCE
+import me.alejandro.mtgspoileralert.utils.LATEST_SET_PREFERENCE
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -29,11 +34,16 @@ class SyncDataWorker @Inject constructor(
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         try {
-            val params = GetCardsUseCase.Params(code = "iko")
-            getCardsUseCase.invoke(this, params) {
-                it.fold(::handleFailure, ::handleSuccess)
+            val prefs = context.getSharedPreferences(CARDS_PREFERENCE, 0)
+            prefs.getString(LATEST_SET_PREFERENCE, null)?.let { latestSet ->
+                val params = GetCardsUseCase.Params(code = latestSet)
+                getCardsUseCase.invoke(this, params) {
+                    it.fold(::handleFailure, ::handleSuccess)
+                }
+                Result.success()
             }
-            Result.success()
+            Result.failure()
+
         } catch (error: Throwable) {
             Result.failure()
         }
@@ -44,16 +54,30 @@ class SyncDataWorker @Inject constructor(
     }
 
     private fun handleSuccess(list: List<Card>) {
-        createNotificationChannel()
-        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher_round)
-            .setContentTitle(context.resources.getString(R.string.new_cards_notification_title))
-            .setContentText(context.resources.getString(R.string.new_cards_notification_content))
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        val prefs = context.getSharedPreferences(CARDS_PREFERENCE, 0)
 
-        with(NotificationManagerCompat.from(context)) {
-            notify(1, builder.build())
+        prefs.getString(LATEST_RESPONSE_PREFERENCE, null)?.let { latestResponse ->
+            val moshi = Moshi.Builder().build()
+            val type = Types.newParameterizedType(List::class.java, Card::class.java)
+            val adapter = moshi.adapter<List<Card>>(type)
+
+            adapter.fromJson(latestResponse)?.let {
+                if (list.size > it.size) {
+                    createNotificationChannel()
+                    val builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
+                        setSmallIcon(R.mipmap.ic_launcher_round)
+                        setContentTitle(context.resources.getString(R.string.new_cards_notification_title))
+                        setContentText(context.resources.getString(R.string.new_cards_notification_content))
+                        priority = NotificationCompat.PRIORITY_DEFAULT
+                    }
+
+                    with(NotificationManagerCompat.from(context)) {
+                        notify(1, builder.build())
+                    }
+                }
+            }
         }
+
     }
 
     private fun createNotificationChannel() {
