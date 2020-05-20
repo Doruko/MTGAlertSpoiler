@@ -18,4 +18,6 @@
 
     <string name="preferences_cards" translatable="false">cardsPreferences</string>
     <string name="preference_recurrent_calls" translatable="false">recurrentCall</string>
+    <string name="new_cards_notification_title">MTGAlertSpoiler</string>
+    <string name="new_cards_notification_content">There are new cards!</string>
 </resources>
