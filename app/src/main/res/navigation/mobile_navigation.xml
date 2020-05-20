@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_set_list">
+    app:startDestination="@+id/setsFragment">
 
     <fragment
-        android:id="@+id/nav_set_list"
+        android:id="@+id/setsFragment"
         android:name="me.alejandro.mtgspoileralert.ui.setList.SetListFragment"
         android:label="Sets"
         tools:layout="@layout/fragment_set_list">
         <action
             android:id="@+id/action_nav_set_list_to_setFragment"
-            app:destination="@id/setFragment" >
+            app:destination="@id/cardsFragment">
 
         </action>
     </fragment>
     <fragment
-        android:id="@+id/setFragment"
+        android:id="@+id/cardsFragment"
         android:name="me.alejandro.mtgspoileralert.ui.cardList.CardListFragment"
         android:label="Cards"
         tools:layout="@layout/fragment_card_list" >

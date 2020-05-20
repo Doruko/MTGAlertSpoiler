@@ -4,9 +4,11 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.squareup.moshi.Moshi
@@ -17,9 +19,11 @@ import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.data.usecases.GetCardsUseCase
 import me.alejandro.mtgspoileralert.domain.base.Failure
 import me.alejandro.mtgspoileralert.domain.model.card.Card
+import me.alejandro.mtgspoileralert.ui.MainActivity
 import me.alejandro.mtgspoileralert.utils.CARDS_PREFERENCE
 import me.alejandro.mtgspoileralert.utils.LATEST_RESPONSE_PREFERENCE
 import me.alejandro.mtgspoileralert.utils.LATEST_SET_PREFERENCE
+import me.alejandro.mtgspoileralert.utils.SET_CODE_EXTRA
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -62,13 +66,25 @@ class SyncDataWorker @Inject constructor(
             val adapter = moshi.adapter<List<Card>>(type)
 
             adapter.fromJson(latestResponse)?.let {
-                if (list.size > it.size) {
+                if (list.size >= it.size) {
                     createNotificationChannel()
+
+                    val bundle = Bundle()
+                    bundle.putString(SET_CODE_EXTRA, prefs.getString(LATEST_SET_PREFERENCE, ""))
+
+                    val pendingIntent = NavDeepLinkBuilder(context)
+                        .setComponentName(MainActivity::class.java)
+                        .setGraph(R.navigation.mobile_navigation)
+                        .setDestination(R.id.cardsFragment)
+                        .setArguments(bundle)
+                        .createPendingIntent()
+
                     val builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
                         setSmallIcon(R.mipmap.ic_launcher_round)
                         setContentTitle(context.resources.getString(R.string.new_cards_notification_title))
                         setContentText(context.resources.getString(R.string.new_cards_notification_content))
                         priority = NotificationCompat.PRIORITY_DEFAULT
+                        setContentIntent(pendingIntent)
                     }
 
                     with(NotificationManagerCompat.from(context)) {

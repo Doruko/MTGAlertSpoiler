@@ -10,6 +10,8 @@ import me.alejandro.mtgspoileralert.domain.base.BaseAndroidViewModel
 import me.alejandro.mtgspoileralert.domain.base.Failure
 import me.alejandro.mtgspoileralert.domain.model.set.Set
 import me.alejandro.mtgspoileralert.domain.model.set.SetType
+import me.alejandro.mtgspoileralert.utils.CARDS_PREFERENCE
+import me.alejandro.mtgspoileralert.utils.LATEST_SET_PREFERENCE
 import javax.inject.Inject
 
 class SetListAndroidViewModel(application: Application) : BaseAndroidViewModel(application) {
@@ -41,9 +43,15 @@ class SetListAndroidViewModel(application: Application) : BaseAndroidViewModel(a
     }
 
     private fun handleSuccess(list: List<Set>) {
+        val context = getApplication<Application>().applicationContext
+        val prefs = context.getSharedPreferences(CARDS_PREFERENCE, 0)
+
         list.filter {
             it.set_type == SetType.EXPANSION
         }.also {
+            prefs.edit()
+                .putString(LATEST_SET_PREFERENCE, it.first().code)
+                .apply()
             setListAdapter.updateSetList(it)
         }
     }
