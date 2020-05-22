@@ -8,6 +8,11 @@
 
     <string name="preferences_cards" translatable="false">cardsPreferences</string>
     <string name="preference_recurrent_calls" translatable="false">recurrentCall</string>
+    <string name="preference_recurrent_calls_timing" translatable="false">recurrentCallTiming</string>
     <string name="new_cards_notification_title" translatable="false">MTGAlertSpoiler</string>
     <string name="new_cards_notification_content">There are new cards!</string>
+    <string name="preference_network_title">Network</string>
+    <string name="preference_recurrent_calls_text">" Enable recurrent calls"</string>
+    <string name="preference_recurrent_calls_timing_text">Set interval period</string>
+    <string name="preference_recurrent_calls_timing_summary">In minutes</string>
 </resources>

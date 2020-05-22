@@ -6,4 +6,8 @@
     <string name="card_error">Ha habido un problema cargando las cartas</string>
     <string name="menu_settings">Configuración</string>
     <string name="new_cards_notification_content">¡Hay cartas nuevas!</string>
+    <string name="preference_network_title">Red</string>
+    <string name="preference_recurrent_calls_text">Habilitar llamadas recurrentes</string>
+    <string name="preference_recurrent_calls_timing_text">" Establecer período de intervalo"</string>
+    <string name="preference_recurrent_calls_timing_summary">En minutos</string>
 </resources>

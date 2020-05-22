@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SeekBarPreference
 import androidx.work.*
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.data.worker.SyncDataWorker
 import me.alejandro.mtgspoileralert.injection.viewModelFactory
+import me.alejandro.mtgspoileralert.utils.CALL_PERIOD_PREFERENCE
 import me.alejandro.mtgspoileralert.utils.CALL_PREFERENCE
 import java.util.concurrent.TimeUnit
 
@@ -43,7 +45,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         )
 
         viewModel.worker.observe(viewLifecycleOwner, Observer { factory ->
-            performSafeWorkManagerAction({}, {
+            performSafeWorkManagerAction(actionIfNotInitialized = {
                 WorkManager.initialize(
                     requireContext(),
                     Configuration.Builder().setMinimumLoggingLevel(Log.INFO)
@@ -55,7 +57,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
 
-            val work = PeriodicWorkRequestBuilder<SyncDataWorker>(15, TimeUnit.MINUTES)
+            val work = PeriodicWorkRequestBuilder<SyncDataWorker>(
+                preferenceManager.sharedPreferences.getInt(
+                    CALL_PERIOD_PREFERENCE, 15
+                ).toLong(), TimeUnit.MINUTES
+            )
                 .setConstraints(c)
                 .build()
 
@@ -63,6 +69,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
             workManager.enqueue(work)
 
         })
+
+        preferenceScreen.findPreference<SeekBarPreference>(CALL_PERIOD_PREFERENCE)?.isEnabled =
+            preferenceManager.sharedPreferences.getBoolean(
+                CALL_PREFERENCE, false
+            )
 
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -82,28 +93,29 @@ class SettingsFragment : PreferenceFragmentCompat(),
         when (key) {
             CALL_PREFERENCE -> {
                 if (prefereneces.getBoolean(CALL_PREFERENCE, false)) {
+                    preferenceScreen.findPreference<SeekBarPreference>(CALL_PERIOD_PREFERENCE)?.isEnabled =
+                        true
                     viewModel.provideFactory()
                 } else {
-                    performSafeWorkManagerAction({
+                    preferenceScreen.findPreference<SeekBarPreference>(CALL_PERIOD_PREFERENCE)?.isEnabled =
+                        false
+                    performSafeWorkManagerAction(actionIfInitialized = {
                         WorkManager.getInstance(requireContext()).cancelAllWork()
-                    }, {})
-
+                    })
                 }
-
-
             }
         }
     }
 
     private fun performSafeWorkManagerAction(
-        actionIfInitialized: () -> Unit,
-        actionIfNotInitialized: () -> Unit
+        actionIfInitialized: (() -> Unit)? = null,
+        actionIfNotInitialized: (() -> Unit)? = null
     ) {
         try {
             WorkManager.getInstance(requireContext())
-            actionIfInitialized.invoke()
+            actionIfInitialized?.invoke()
         } catch (e: Exception) {
-            actionIfNotInitialized.invoke()
+            actionIfNotInitialized?.invoke()
         }
     }
 
