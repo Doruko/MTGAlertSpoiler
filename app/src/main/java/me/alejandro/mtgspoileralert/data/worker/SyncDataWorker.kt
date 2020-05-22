@@ -20,10 +20,7 @@ import me.alejandro.mtgspoileralert.data.usecases.GetCardsUseCase
 import me.alejandro.mtgspoileralert.domain.base.Failure
 import me.alejandro.mtgspoileralert.domain.model.card.Card
 import me.alejandro.mtgspoileralert.ui.MainActivity
-import me.alejandro.mtgspoileralert.utils.CARDS_PREFERENCE
-import me.alejandro.mtgspoileralert.utils.LATEST_RESPONSE_PREFERENCE
-import me.alejandro.mtgspoileralert.utils.LATEST_SET_PREFERENCE
-import me.alejandro.mtgspoileralert.utils.SET_CODE_EXTRA
+import me.alejandro.mtgspoileralert.utils.*
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -34,7 +31,7 @@ class SyncDataWorker @Inject constructor(
 ) :
     CoroutineWorker(context, params) {
 
-    val CHANNEL_ID = "cardsId"
+
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         try {
@@ -72,12 +69,13 @@ class SyncDataWorker @Inject constructor(
                     val bundle = Bundle()
                     bundle.putString(SET_CODE_EXTRA, prefs.getString(LATEST_SET_PREFERENCE, ""))
 
-                    val pendingIntent = NavDeepLinkBuilder(context)
-                        .setComponentName(MainActivity::class.java)
-                        .setGraph(R.navigation.mobile_navigation)
-                        .setDestination(R.id.cardsFragment)
-                        .setArguments(bundle)
-                        .createPendingIntent()
+                    val pendingIntent = NavDeepLinkBuilder(context).apply {
+                        setComponentName(MainActivity::class.java)
+                        setGraph(R.navigation.mobile_navigation)
+                        setDestination(R.id.cardsFragment)
+                        setArguments(bundle)
+                    }.createPendingIntent()
+
 
                     val builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
                         setSmallIcon(R.mipmap.ic_launcher_round)
