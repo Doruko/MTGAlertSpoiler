@@ -30,7 +30,7 @@ class SetListViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = SetListAndroidViewModel()
+        viewModel = SetListAndroidViewModel(mockk())
     }
 
     @ExperimentalCoroutinesApi

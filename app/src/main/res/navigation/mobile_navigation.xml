@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/setsFragment">
+    app:startDestination="@+id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="me.alejandro.mtgspoileralert.ui.splash.SplashFragment"
+        android:label="Splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_nav_splashFragment_to_setsFragment"
+            app:destination="@id/setsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/setsFragment"
@@ -11,7 +21,7 @@
         android:label="Sets"
         tools:layout="@layout/fragment_set_list">
         <action
-            android:id="@+id/action_nav_set_list_to_setFragment"
+            android:id="@+id/action_nav_setsFragment_to_cardsFragment"
             app:destination="@id/cardsFragment">
 
         </action>
@@ -31,7 +41,7 @@
         android:name="me.alejandro.mtgspoileralert.ui.settings.SettingsFragment"
         android:label="Settings" />
     <action
-        android:id="@+id/openSettingsAction"
+        android:id="@+id/action_open_settingsFragment"
         app:destination="@id/settingsFragment" />
 
 </navigation>
