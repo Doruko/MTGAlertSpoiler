@@ -2,7 +2,6 @@ package me.alejandro.mtgspoileralert.ui.setList
 
 import android.os.Bundle
 import android.view.*
-import android.widget.ProgressBar
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -10,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.snackbar.Snackbar
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.databinding.FragmentSetListBinding
@@ -19,7 +19,7 @@ import me.alejandro.mtgspoileralert.injection.viewModelFactory
 class SetListFragment : Fragment() {
     private lateinit var binding: FragmentSetListBinding
     private lateinit var viewModel: SetListAndroidViewModel
-    private lateinit var progressbar: ProgressBar
+    private lateinit var progressbar: LottieAnimationView
 
     private var errorSnackBar: Snackbar? = null
 
