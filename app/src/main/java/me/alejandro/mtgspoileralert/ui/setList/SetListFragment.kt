@@ -15,6 +15,7 @@ import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.databinding.FragmentSetListBinding
 import me.alejandro.mtgspoileralert.injection.viewModelFactory
 
+
 class SetListFragment : Fragment() {
     private lateinit var binding: FragmentSetListBinding
     private lateinit var viewModel: SetListAndroidViewModel
@@ -73,7 +74,7 @@ class SetListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> {
-                findNavController().navigate(R.id.openSettingsAction)
+                findNavController().navigate(R.id.action_open_settingsFragment)
                 return true
             }
         }
