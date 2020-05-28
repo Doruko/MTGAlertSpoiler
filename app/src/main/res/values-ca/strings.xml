@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MTG Spoiler Alert</string>
+    <string name="retry">Reintentar</string>
+    <string name="set_error">" S'ha produït un error en carregar les expansions"</string>
+    <string name="card_error">S\'ha produït un error en carregar les cartes</string>
+    <string name="menu_settings">Configuració</string>
+    <string name="new_cards_notification_content">"Hi ha cartes noves! "</string>
+    <string name="preference_network_title">Red</string>
+    <string name="preference_recurrent_calls_text">" Habilita trucades recurrents"</string>
+    <string name="preference_recurrent_calls_timing_text">" Estableix un període d’interval"</string>
+    <string name="preference_recurrent_calls_timing_summary">En minuts</string>
+</resources>

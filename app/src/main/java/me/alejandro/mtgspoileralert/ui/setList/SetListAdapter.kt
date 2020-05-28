@@ -22,7 +22,7 @@ class SetListAdapter() : RecyclerView.Adapter<SetListAdapter.ViewHolder>() {
         return ViewHolder(binding).apply {
             itemView.setOnClickListener { view ->
                 val code = setList[this.adapterPosition].code
-                val action = SetListFragmentDirections.actionNavSetListToSetFragment(code)
+                val action = SetListFragmentDirections.actionNavSetsFragmentToCardsFragment(code)
                 view.findNavController().navigate(action)
             }
         }

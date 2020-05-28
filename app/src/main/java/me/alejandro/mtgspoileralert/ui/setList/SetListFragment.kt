@@ -1,26 +1,25 @@
 package me.alejandro.mtgspoileralert.ui.setList
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ProgressBar
+import android.view.*
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.snackbar.Snackbar
 import me.alejandro.mtgspoileralert.R
-
 import me.alejandro.mtgspoileralert.databinding.FragmentSetListBinding
 import me.alejandro.mtgspoileralert.injection.viewModelFactory
 
+
 class SetListFragment : Fragment() {
     private lateinit var binding: FragmentSetListBinding
-    private lateinit var viewModel: SetListViewModel
-    private lateinit var progressbar: ProgressBar
+    private lateinit var viewModel: SetListAndroidViewModel
+    private lateinit var progressbar: LottieAnimationView
 
     private var errorSnackBar: Snackbar? = null
 
@@ -29,7 +28,7 @@ class SetListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(false)
+        setHasOptionsMenu(true)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_list, container, false)
         binding.lifecycleOwner = this
@@ -38,7 +37,11 @@ class SetListFragment : Fragment() {
         binding.setList.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
-        viewModel = ViewModelProvider(this, viewModelFactory { SetListViewModel() }).get(SetListViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory { SetListAndroidViewModel(requireActivity().application) }).get(
+            SetListAndroidViewModel::class.java
+        )
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
         })
@@ -62,5 +65,19 @@ class SetListFragment : Fragment() {
 
     private fun hideError(){
         errorSnackBar?.dismiss()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.settings, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings -> {
+                findNavController().navigate(R.id.action_open_settingsFragment)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

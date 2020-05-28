@@ -4,17 +4,15 @@
     <string name="retry">Retry</string>
     <string name="set_error">An error occurred while loading the sets</string>
     <string name="card_error">An error occurred while loading the cards</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="menu_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-
-    <string name="home_second">Home Second</string>
+    <string name="preferences_cards" translatable="false">cardsPreferences</string>
+    <string name="preference_recurrent_calls" translatable="false">recurrentCall</string>
+    <string name="preference_recurrent_calls_timing" translatable="false">recurrentCallTiming</string>
+    <string name="new_cards_notification_title" translatable="false">MTGAlertSpoiler</string>
+    <string name="new_cards_notification_content">There are new cards!</string>
+    <string name="preference_network_title">Network</string>
+    <string name="preference_recurrent_calls_text">" Enable recurrent calls"</string>
+    <string name="preference_recurrent_calls_timing_text">Set interval period</string>
+    <string name="preference_recurrent_calls_timing_summary">In minutes</string>
 </resources>

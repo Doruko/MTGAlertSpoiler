@@ -1,12 +1,14 @@
 package me.alejandro.mtgspoileralert.domain.base
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import me.alejandro.mtgspoileralert.injection.component.DaggerViewModelInjector
 import me.alejandro.mtgspoileralert.injection.component.ViewModelInjector
 import me.alejandro.mtgspoileralert.injection.module.NetworkModule
-import me.alejandro.mtgspoileralert.ui.settings.SettingsFragmentViewModel
+import me.alejandro.mtgspoileralert.ui.cardList.CardListAndroidViewModel
+import me.alejandro.mtgspoileralert.ui.setList.SetListAndroidViewModel
 
-abstract class BaseViewModel() : ViewModel() {
+abstract class BaseAndroidViewModel(application: Application) : AndroidViewModel(application) {
     private val injector: ViewModelInjector = DaggerViewModelInjector
         .builder()
         .networkModule(NetworkModule)
@@ -18,7 +20,8 @@ abstract class BaseViewModel() : ViewModel() {
 
     private fun inject() {
         when (this) {
-            is SettingsFragmentViewModel -> injector.inject(this)
+            is SetListAndroidViewModel -> injector.inject(this)
+            is CardListAndroidViewModel -> injector.inject(this)
         }
     }
 }

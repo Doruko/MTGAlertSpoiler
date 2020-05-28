@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.squareup.picasso.Callback
 import me.alejandro.mtgspoileralert.domain.base.BaseViewModel
 
-class CardDialogViewModel : BaseViewModel() {
+class CardDialogViewModel() : BaseViewModel() {
     val cardUrl = MutableLiveData<String>()
     val cardCallback = MutableLiveData<Callback>()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()

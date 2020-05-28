@@ -4,20 +4,24 @@
     <data>
         <variable
             name="viewModel"
-            type="me.alejandro.mtgspoileralert.ui.cardList.CardListViewModel" />
+            type="me.alejandro.mtgspoileralert.ui.cardList.CardListAndroidViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mutableVisibility="@{viewModel.loadingVisibility}"
-            app:layout_constraintTop_toTopOf="parent"
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/mtg_loader"
+            app:mutableVisibility="@{viewModel.loadingVisibility}" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="0dp"
