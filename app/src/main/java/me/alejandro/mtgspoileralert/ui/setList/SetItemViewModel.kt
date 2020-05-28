@@ -10,7 +10,7 @@ class SetItemViewModel() : BaseViewModel() {
 
     fun bind(set: Set){
         setTitle.value = set.name
-        setCode.value = set.code
+        setCode.value = set.code.toUpperCase()
     }
 
     fun getSetTitle(): MutableLiveData<String> = setTitle
