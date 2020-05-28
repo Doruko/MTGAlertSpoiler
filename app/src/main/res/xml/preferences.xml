@@ -2,24 +2,27 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory
-        android:key="network_category"
-        android:title="@string/preference_network_title">
+    <SwitchPreferenceCompat
+        android:key="@string/preference_recurrent_calls"
+        android:title="@string/preference_recurrent_calls_text"
+        app:iconSpaceReserved="false" />
 
-        <SwitchPreferenceCompat
-            android:key="@string/preference_recurrent_calls"
-            android:title="@string/preference_recurrent_calls_text" />
+    <SeekBarPreference
+        android:defaultValue="15"
+        android:enabled="false"
+        android:key="@string/preference_recurrent_calls_timing"
+        android:max="60"
+        android:summary="@string/preference_recurrent_calls_timing_summary"
+        android:title="@string/preference_recurrent_calls_timing_text"
+        app:iconSpaceReserved="false"
+        app:min="15"
+        app:showSeekBarValue="true" />
 
-        <SeekBarPreference
-            android:defaultValue="15"
-            android:enabled="false"
-            android:key="@string/preference_recurrent_calls_timing"
-            android:max="60"
-            android:summary="@string/preference_recurrent_calls_timing_summary"
-            android:title="@string/preference_recurrent_calls_timing_text"
-            app:min="15"
-            app:showSeekBarValue="true" />
+    <Preference
+        android:summary="@string/versionName"
+        android:title="Version"
+        app:iconSpaceReserved="false">
 
-    </PreferenceCategory>
+    </Preference>
 
 </PreferenceScreen>
