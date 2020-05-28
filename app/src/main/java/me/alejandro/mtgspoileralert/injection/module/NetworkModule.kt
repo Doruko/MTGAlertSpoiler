@@ -27,13 +27,11 @@ object NetworkModule {
 
     @Provides
     @Reusable
-    @JvmStatic
     internal fun provideScryfallApi(retrofit: Retrofit): ScryfallApi =
         retrofit.create(ScryfallApi::class.java)
 
     @Provides
     @Reusable
-    @JvmStatic
     internal fun provideRetrofitInterface(): Retrofit =
         Retrofit.Builder()
             .baseUrl(BASE_URL)

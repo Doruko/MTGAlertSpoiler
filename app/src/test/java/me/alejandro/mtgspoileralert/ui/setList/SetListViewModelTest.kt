@@ -26,11 +26,11 @@ class SetListViewModelTest {
 
     var getSetsUseCase: GetSetsUseCase = mockk()
 
-    private lateinit var viewModel: SetListViewModel
+    private lateinit var viewModel: SetListAndroidViewModel
 
     @Before
     fun setup() {
-        viewModel = SetListViewModel()
+        viewModel = SetListAndroidViewModel(mockk())
     }
 
     @ExperimentalCoroutinesApi
