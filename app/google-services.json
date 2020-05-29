@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "751069331719",
+    "firebase_url": "https://mtg-spoiler-alert-2462b.firebaseio.com",
+    "project_id": "mtg-spoiler-alert-2462b",
+    "storage_bucket": "mtg-spoiler-alert-2462b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751069331719:android:edb405f521fb2ca34885a2",
+        "android_client_info": {
+          "package_name": "me.alejandro.mtgspoileralert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751069331719-3ru8gk5h7hcpsu19gad4du3b9t9uic2e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.alejandro.mtgspoileralert",
+            "certificate_hash": "eaf0f54a160aec52bc3b47671ad9ce8a82e7c60d"
+          }
+        },
+        {
+          "client_id": "751069331719-q2e08ihksl2fc51pbql26nfr46or28q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaLl3DsSvxHZTCE8Agt84DE9QJTbkse6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751069331719-q2e08ihksl2fc51pbql26nfr46or28q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
