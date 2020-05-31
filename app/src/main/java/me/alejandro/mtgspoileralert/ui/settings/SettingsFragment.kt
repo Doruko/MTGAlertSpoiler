@@ -1,5 +1,6 @@
 package me.alejandro.mtgspoileralert.ui.settings
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import androidx.work.*
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.data.worker.SyncDataWorker
 import me.alejandro.mtgspoileralert.injection.viewModelFactory
+import me.alejandro.mtgspoileralert.ui.MainActivity
 import me.alejandro.mtgspoileralert.utils.CALL_PERIOD_PREFERENCE
 import me.alejandro.mtgspoileralert.utils.CALL_PREFERENCE
 import java.util.concurrent.TimeUnit
@@ -23,6 +25,13 @@ class SettingsFragment : PreferenceFragmentCompat(),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var viewModel: SettingsFragmentViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        val activity = context as MainActivity
+        activity.toolbar.setNavigationIcon(R.drawable.ic_back)
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)

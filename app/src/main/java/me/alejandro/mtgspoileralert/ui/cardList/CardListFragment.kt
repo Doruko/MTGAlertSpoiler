@@ -1,5 +1,6 @@
 package me.alejandro.mtgspoileralert.ui.cardList
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.StringRes
@@ -14,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import me.alejandro.mtgspoileralert.R
 import me.alejandro.mtgspoileralert.databinding.FragmentCardListBinding
 import me.alejandro.mtgspoileralert.injection.viewModelFactory
+import me.alejandro.mtgspoileralert.ui.MainActivity
 import me.alejandro.mtgspoileralert.ui.cardList.cardDialog.CardDialog
 import me.alejandro.mtgspoileralert.ui.cardList.cardDialog.CardDialogViewModel
 
@@ -25,6 +27,13 @@ class CardListFragment : Fragment() {
     private val args: CardListFragmentArgs by navArgs()
 
     private var errorSnackBar: Snackbar? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        val activity = context as MainActivity
+        activity.toolbar.setNavigationIcon(R.drawable.ic_back)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
