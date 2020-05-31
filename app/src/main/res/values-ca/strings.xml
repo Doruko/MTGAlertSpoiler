@@ -10,4 +10,5 @@
     <string name="preference_recurrent_calls_text">" Habilita trucades recurrents"</string>
     <string name="preference_recurrent_calls_timing_text">" Estableix un període d’interval"</string>
     <string name="preference_recurrent_calls_timing_summary">En minuts</string>
+    <string name="search_menu">Cerca</string>
 </resources>

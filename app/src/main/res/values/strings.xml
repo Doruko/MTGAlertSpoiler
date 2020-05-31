@@ -15,4 +15,5 @@
     <string name="preference_recurrent_calls_text">" Enable recurrent calls"</string>
     <string name="preference_recurrent_calls_timing_text">Set interval period</string>
     <string name="preference_recurrent_calls_timing_summary">In minutes</string>
+    <string name="search_menu">Search</string>
 </resources>
