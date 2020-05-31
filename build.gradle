@@ -21,8 +21,8 @@ buildscript {
         androidSupportVersion = '28.0.0-alpha3'
         roomVersion = '1.1.1'
         mockkVersion = '1.10.0'
-        appMajorVersion = '0'
-        appMinorVersion = '9'
+        appMajorVersion = '1'
+        appMinorVersion = '0'
         appPatchVersion = '0'
     }
 
