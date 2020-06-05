@@ -23,7 +23,7 @@ buildscript {
         mockkVersion = '1.10.0'
         appMajorVersion = '1'
         appMinorVersion = '0'
-        appPatchVersion = '0'
+        appPatchVersion = '1'
     }
 
     repositories {
