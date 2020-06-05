@@ -47,7 +47,7 @@ class SetListAndroidViewModel(application: Application) : BaseAndroidViewModel(a
         val prefs = context.getSharedPreferences(CARDS_PREFERENCE, 0)
 
         list.filter {
-            it.set_type == SetType.EXPANSION
+            it.set_type == SetType.EXPANSION || it.set_type == SetType.CORE
         }.also {
             prefs.edit()
                 .putString(LATEST_SET_PREFERENCE, it.first().code)
