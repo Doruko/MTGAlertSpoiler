@@ -83,6 +83,7 @@ class SyncDataWorker @Inject constructor(
                         setContentText(context.resources.getString(R.string.new_cards_notification_content))
                         priority = NotificationCompat.PRIORITY_DEFAULT
                         setContentIntent(pendingIntent)
+                        setAutoCancel(true)
                     }
 
                     with(NotificationManagerCompat.from(context)) {
